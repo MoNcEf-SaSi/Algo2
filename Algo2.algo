@@ -1,0 +1,200 @@
+ALGORITHME nom_algorithme
+VAR 
+    //1tableau
+    onglet : ARRAY_OF INTEGER[5] ;
+    pos,elt : INTEGER ;
+    //2matrice
+    a : ARRAY_OF INTEGER[M][N] ;
+    b : ARRAY_OF INTEGER[M][O] ;
+    c : ARRAY_OF INTEGER[M][O] ;
+    //3chaînes
+            //1
+            str: STRING[]:= "GOMYCODE"
+            //2
+            chaîne1, chaîne2 :chaîne[50] ;
+    //4Structure
+        Personne : STRUCT
+                            cin : INTEGER;
+                            nom : STRING ;
+                            âge : ENTIER ;
+                        END_STRUCT
+        onglet : ARRAY_OF Personne[10] ;  
+
+     //5Pile
+     pile_état : CHAR ; 
+    c : CHAR := ' ';
+    stk : PILE ;
+    faux : BOOLEAN := FALSE;
+
+    // 6 table de hachage
+    htab:HASH_TABLE<INTEGER,STRING>
+
+    // 7 liste chaînée
+    Liste : STRUCT
+                        données : INTEGER ; //toute structure de données
+                        suivant : ^Liste; //^ pointeur
+                        
+                    END_STRUCT
+
+    d'abord : ^Liste :=NULL //pointeur
+    p: ^Liste :=NULL //pointeur
+    c:CHAR;
+    i:ENTIER:=0 ;                
+
+COMMENCER
+ //1111 : TABLEAU   
+ //
+    POUR i DE 0 À tab.longueur-1 FAIRE
+        lire(onglet[i])
+    END_FOR
+
+    //insérer un élément (pos de l'élément elt et valeur de l'élément)
+      j := tab.length-1;
+    TANT QUE (j >= pos) FAIRE
+        tab[j+1] := tab[j] ; // traduction de gauche à droite
+        j := j-1; // mise à jour de l'index
+    END_WHILE
+
+    tab[pos] := elt;
+  // 111111
+
+//////////////////////////////////////////////// //////////////////////////////////////
+
+  //2222:Matrice
+  //
+    POUR i DE 0 A M-1 FAIRE
+        POUR j DE 0 A N-1 FAIRE
+            lire(tab[i][j])
+        END_FOR
+    END_FOR
+
+    POUR i DE 0 A M-1 FAIRE
+        POUR j DE 0 A O-1 FAIRE
+            POUR k DE 0 A N-1 FAIRE
+                c[i][j] :=c[i][j]+a[i][k]*b[k][j]
+            END_FOR
+        END_FOR
+    END_FOR
+
+
+  //222  
+//////////////////////////////////////////////// //////////////////////////////////////
+
+  //33333 :Chaîne 
+  
+
+    //comparer deux chaînes
+
+    SI (str1.length<>str2.length) ALORS
+        écrire("les chaînes ne sont pas égales")
+    AUTRE
+        str1:=toUpperCase(str1)
+        str2:=toUpperCase(str2)
+
+        POUR i DE 0 À str1.longueur-1 FAIRE
+            SI (ch1[i]<>ch2[i]) ALORS
+                PAUSE;
+            FIN SI
+        END_FOR
+        SI (i=ch1.longueur-1) ALORS
+            écrire("les chaînes sont égales")
+        AUTRE
+            écrire("les chaînes ne sont pas égales")
+        FIN SI
+    FIN SI
+
+  //3333
+//////////////////////////////////////////////// //////////////////////////////////////
+
+  //4444:Structure
+    // FOR i FROM 0 TO tab.length-1 STEP step DO
+    // lit(tab[i].cin,tab[i].name,tab[i].age)
+    // END_FOR
+    
+    POUR i DE 0 À tab.longueur-1 FAIRE
+        SI (tab[i].cin=2) ALORS
+            nomPersonne :=tab[i].nom
+        FIN SI
+    END_FOR
+  //444
+//////////////////////////////////////////////// //////////////////////////////////////
+  //5555 : push/pop/peek/isEmpty
+  // [ab[dfv(bd{bbfr })]]
+    TANTQUE (c <> '#' ET PAS faux) FAIRE
+        Lire(c);
+        COMMUTATEUR (c) FAIRE
+            Cas '[': 
+            Cas '{': 
+            case '(' : stk.push(c);
+                            state_stack := stk.peek(); // peek n'affecte pas la pile.
+                            Ecrire(state_stack);
+                            PAUSE;
+            case ']' : SI (stk.peek()='[') ALORS
+                                state_stack := stk.pop(); // peek n'affecte pas la pile.
+                                Ecrire(state_stack);
+                            AUTRE
+                                faux := VRAI;
+                            FIN SI  
+                            PAUSE;
+            cas ')' : SI (stp.peek()='(') ALORS
+                                state_stack := stk.pop(); // peek n'affecte pas la pile.
+                                Ecrire(state_stack);
+                            AUTRE
+                                faux := VRAI;    
+                            FIN SI  
+                            PAUSE;
+            case '}' : SI (stp.peek()='{') ALORS
+                                state_stack := stk.pop(); // peek n'affecte pas la pile.
+                                Ecrire(state_stack);
+                            AUTRE
+                                faux := VRAI;
+                            FIN SI  
+                            PAUSE;
+                            
+        END_SWITCH
+
+        
+    END_WHILE
+
+    SI (stk.isEmpty() ET PAS faux) ALORS
+        Write("Pile vide, donc les parenthèses correspondent.");
+    AUTRE
+        Write("La pile n'est pas vide, donc les parenthèses ne correspondent pas.");
+    FIN SI
+  //5555
+//////////////////////////////////////////////// ////////////////////////////////////////
+
+//6666 : insérer/obtenir/rechercher/supprimer une table de hachage
+    htab.insert(0,"zéro")
+    htab.insert(1,"un");
+    htab.insert(2,"deux");
+    htab.insert(3,"trois");
+
+    htab.lookup(0); // VRAI
+    htab.lookup(5); // FAUX
+
+    htab.get(0); // "zéro"
+
+    htab.delete(0);
+
+
+//6666
+//////////////////////////////////////////////// ///////////////////////////////////////////
+
+//7777 :Créer une liste liée/libérer
+
+    TANT QUE (i<3) FAIRE
+        lire(c)
+        // alloue de la mémoire et crée un nœud 
+        p:=créer(Liste)
+        
+        // insère des données dans le noeud       
+        p^.data:=c;
+       // lien d'abord vers p en insérant dans l'en-tête de la liste
+       p^.suivant:=premier //null
+       premier :=p
+
+    END_WHILE
+//7777
+
+FINIR
